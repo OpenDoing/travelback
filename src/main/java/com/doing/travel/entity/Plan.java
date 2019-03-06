@@ -1,6 +1,10 @@
 package com.doing.travel.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -14,13 +18,25 @@ public class Plan {
     private String title;
     private String start;
     private String destination;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private LocalDateTime ctime;
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date stime;
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date etime;
-    private Integer budget;
-    private Integer people;
-    private Integer fee;
-    private String cover;
+    private Integer budget;         //预算
+    private Integer people;         //
+    private String fee;            //出钱方式 AA? 男A女免？ 我请客
+    private String cover;           //封面
     private String description;
+
+    public LocalDateTime getCtime() {
+        return ctime;
+    }
+
+    public void setCtime(LocalDateTime ctime) {
+        this.ctime = ctime;
+    }
 
     public Integer getId() {
         return id;
@@ -94,11 +110,11 @@ public class Plan {
         this.people = people;
     }
 
-    public Integer getFee() {
+    public String getFee() {
         return fee;
     }
 
-    public void setFee(Integer fee) {
+    public void setFee(String fee) {
         this.fee = fee;
     }
 

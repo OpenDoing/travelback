@@ -1,11 +1,15 @@
 package com.doing.travel.entity;
 
-import java.io.Serializable;
+import javax.persistence.*;
 
-public class JoinPrimaryKey implements Serializable {
-
+@Entity
+@Table(name = "joinp")
+@IdClass(JoinPrimaryKey.class)
+public class Joinp {
+    @Id
     private Integer pid;
-
+    @Column(name = "user_id")
+    @Id
     private Integer userId;
 
     public Integer getPid() {

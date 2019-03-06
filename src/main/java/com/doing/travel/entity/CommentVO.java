@@ -1,22 +1,13 @@
 package com.doing.travel.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "comment")
-public class Comment {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CommentVO {
     private Integer id;
-    private Integer pid;
-    @Column(name = "user_id")
     private Integer userId;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime ctime;
     private String content;
+    private String avatar;
 
     public Integer getId() {
         return id;
@@ -50,11 +41,11 @@ public class Comment {
         this.content = content;
     }
 
-    public Integer getPid() {
-        return pid;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setPid(Integer pid) {
-        this.pid = pid;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }
