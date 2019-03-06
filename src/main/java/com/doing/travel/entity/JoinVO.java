@@ -6,7 +6,7 @@ public class JoinVO {
     private Integer pid;
     private Integer userId;
     private String avatar;
-    private Integer sex;
+    private String sex;
 
     public Integer getPid() {
         return pid;
@@ -32,11 +32,11 @@ public class JoinVO {
         this.avatar = avatar;
     }
 
-    public Integer getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(Integer sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 }

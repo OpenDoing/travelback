@@ -24,7 +24,7 @@ import java.util.*;
 @RequestMapping("/plan")
 public class PlanController {
 
-    @Value("${coverpath}")
+    @Value("${imgpath}")
     private String filePath;
 
     @Autowired

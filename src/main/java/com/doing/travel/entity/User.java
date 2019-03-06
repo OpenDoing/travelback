@@ -12,10 +12,28 @@ public class User {
     private String username;
     private String password;
     private String avatar;
-    private Integer sex;
+    private String sex;
     private Date birth;
     private String phone;
     private Integer status;
+    private String address;
+    private String emotion;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getEmotion() {
+        return emotion;
+    }
+
+    public void setEmotion(String emotion) {
+        this.emotion = emotion;
+    }
 
     public Integer getStatus() {
         return status;
@@ -57,11 +75,11 @@ public class User {
         this.avatar = avatar;
     }
 
-    public Integer getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(Integer sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 

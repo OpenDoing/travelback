@@ -51,35 +51,24 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public Object reg(@RequestParam String username,
-                      @RequestParam String password,
-                      @RequestParam Integer sex,
-                      @RequestParam String birth,
-                      @RequestParam String phone) {
-        if(StringUtils.isEmpty(username) || StringUtils.isEmpty(password)){
-            return ResponseUtil.badArgument();
-        }
+    public Object reg(@RequestBody User user) {
 
-        User user1 = userRepo.findUserByUsername(username);
+        User user1 = userRepo.findUserByUsername(user.getUsername());
         if(user1 != null){
             return ResponseUtil.regerr();
         }
-        User user = new User();
         user.setAvatar("default.png");
         user.setStatus(1);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         formatter.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
         try {
-            Date date = formatter.parse(birth);
+            Date date = formatter.parse(user.getBirth().toString());
             user.setBirth(date);
         }catch (ParseException e){
             e.printStackTrace();
         }
-        user.setPhone(phone);
-        user.setSex(sex);
-        user.setUsername(username);
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        user.setPassword(encoder.encode(password));
+        user.setPassword(encoder.encode(user.getPassword()));
         userRepo.save(user);
         return ResponseUtil.ok(user);
     }
@@ -122,6 +111,11 @@ public class UserController {
         }else {
             return ResponseUtil.fail(-1, "原密码不匹配");
         }
+    }
+
+    @GetMapping("/get")
+    public Object getUser(@RequestParam Integer userId) {
+        return ResponseUtil.ok(userRepo.findUserById(userId));
     }
 
 }

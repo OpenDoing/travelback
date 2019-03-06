@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
         infoPage.setId(user.getId());
         infoPage.setSex(user.getSex());
         infoPage.setUsername(user.getUsername());
-
+        infoPage.setAvatar(user.getAvatar());
         int createNum = planService.getPlansByType(user.getId(), 0).size();
         int joinNum = planService.getPlansByType(user.getId(), 1).size();
         infoPage.setCreateNum(createNum);

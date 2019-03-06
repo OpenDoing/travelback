@@ -3,9 +3,18 @@ package com.doing.travel.entity;
 public class InfoPage {
     private Integer id;
     private String username;
-    private Integer sex;
+    private String sex;
     private Integer createNum;
     private Integer joinNum;
+    private String avatar;
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
     public Integer getId() {
         return id;
@@ -23,11 +32,11 @@ public class InfoPage {
         this.username = username;
     }
 
-    public Integer getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(Integer sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 

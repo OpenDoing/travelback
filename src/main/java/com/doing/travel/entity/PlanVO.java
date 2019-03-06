@@ -19,7 +19,7 @@ public class PlanVO {
     private String cover;
     private String description;
     private String username;
-    private Integer sex;
+    private String sex;
     private String avatar;
     private Integer budget;
     private Integer people;
@@ -180,11 +180,11 @@ public class PlanVO {
         this.username = username;
     }
 
-    public Integer getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(Integer sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 }
