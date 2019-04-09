@@ -118,4 +118,19 @@ public class UserController {
         return ResponseUtil.ok(userRepo.findUserById(userId));
     }
 
+    @GetMapping("/users")
+    public Object getUsers() {
+        return ResponseUtil.ok(userRepo.findAll());
+    }
+
+    @PostMapping("/status")
+    public Object getUsers(@RequestParam Integer status, @RequestParam Integer userId) {
+        return ResponseUtil.ok(userRepo.updateStatus(status, userId));
+    }
+
+    @PostMapping("/change")
+    public Object changeInfo(@RequestParam Integer userId, @RequestParam String sex, @RequestParam String birth,
+                             @RequestParam String phone, @RequestParam String address, @RequestParam String emotion) {
+        return ResponseUtil.ok(userRepo.updateInfo(userId, sex, birth, phone, address, emotion));
+    }
 }

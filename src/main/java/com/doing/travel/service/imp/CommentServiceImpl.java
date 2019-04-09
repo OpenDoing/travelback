@@ -35,6 +35,25 @@ public class CommentServiceImpl implements CommentService {
             commentVO.setContent(comment.getContent());
             User user = userRepo.findUserById(comment.getUserId());
             commentVO.setAvatar(user.getAvatar());
+            commentVO.setUsername(user.getUsername());
+            vlist.add(commentVO);
+        }
+        return vlist;
+    }
+
+    @Override
+    public List<CommentVO> getAllComments() {
+        List<Comment> list = commentRepo.findAll();
+        List<CommentVO> vlist = new ArrayList<>();
+        for (Comment comment: list) {
+            CommentVO commentVO = new CommentVO();
+            commentVO.setId(comment.getId());
+            commentVO.setUserId(comment.getUserId());
+            commentVO.setCtime(comment.getCtime());
+            commentVO.setContent(comment.getContent());
+            User user = userRepo.findUserById(comment.getUserId());
+            commentVO.setAvatar(user.getAvatar());
+            commentVO.setUsername(user.getUsername());
             vlist.add(commentVO);
         }
         return vlist;

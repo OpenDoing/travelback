@@ -16,8 +16,18 @@ public class Money {
     @Column(name = "user_id")
     private Integer userId;
     private Date time;
-    private Integer sum;
+    private Double sum;
     private String remark;
+    //分类图片名称
+    private String path;
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
 
     public Integer getId() {
         return id;
@@ -59,11 +69,11 @@ public class Money {
         this.time = time;
     }
 
-    public Integer getSum() {
+    public Double getSum() {
         return sum;
     }
 
-    public void setSum(Integer sum) {
+    public void setSum(Double sum) {
         this.sum = sum;
     }
 

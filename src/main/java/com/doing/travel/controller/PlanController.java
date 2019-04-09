@@ -1,6 +1,8 @@
 package com.doing.travel.controller;
 
+import com.doing.travel.dao.LiketRepo;
 import com.doing.travel.dao.PlanRepo;
+import com.doing.travel.entity.Liket;
 import com.doing.travel.entity.Plan;
 import com.doing.travel.entity.PlanVO;
 import com.doing.travel.service.CommentService;
@@ -29,6 +31,9 @@ public class PlanController {
 
     @Autowired
     private PlanRepo planRepo;
+
+    @Autowired
+    private LiketRepo liketRepo;
 
     @Autowired
     private PlanService planService;
@@ -65,8 +70,17 @@ public class PlanController {
 
     @GetMapping("/list")
     private List<PlanVO> all(@RequestParam Integer id){
-
         return planService.Planlist();
+    }
+
+    @GetMapping("/des")
+    private List<PlanVO> getDes(@RequestParam String destination){
+        return planService.PlanlistByDestination(destination);
+    }
+
+    @GetMapping("/detail")
+    private Object detail(@RequestParam Integer pid){
+        return ResponseUtil.ok(planService.getPlanDetail(pid));
     }
 
     @GetMapping("/type")
@@ -98,6 +112,37 @@ public class PlanController {
         System.out.println(userId);
 
         return ResponseUtil.ok("上传成功",dest.getName());
+    }
+
+
+
+    @PostMapping("/like")
+    public Object LikeVideo(@RequestParam Integer userId, @RequestParam String destination) {
+        if (liketRepo.findLiketByUserIdAndDestination(userId, destination) == null) {
+            liketRepo.insertLike(userId, destination, 1);
+        }else {
+            Liket raw = liketRepo.findLiketByUserIdAndDestination(userId, destination);
+            int t = raw.getFrequency();
+            t = t + 1;
+            raw.setFrequency(t);
+            liketRepo.save(raw);
+        }
+        return ResponseUtil.ok();
+    }
+
+    @GetMapping("/destination")
+    public Object getLikeVideo(@RequestParam Integer userId) {
+        //1.按照userid和分类查询结果
+        List<Liket> likevs = liketRepo.findLiketsByUserId(userId);
+        int temp = 0;
+        String destination = "";
+        for (Liket likev: likevs) {
+            if (likev.getFrequency() > temp) {
+                temp = likev.getFrequency();
+                destination = likev.getDestination();
+            }
+        }
+        return ResponseUtil.ok(planRepo.findPlansByDestination(destination));
     }
 
 }

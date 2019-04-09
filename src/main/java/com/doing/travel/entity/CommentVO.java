@@ -8,6 +8,15 @@ public class CommentVO {
     private LocalDateTime ctime;
     private String content;
     private String avatar;
+    private String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public Integer getId() {
         return id;

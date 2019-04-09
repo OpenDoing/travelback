@@ -2,6 +2,7 @@ package com.doing.travel.controller;
 
 import com.doing.travel.dao.MoneyRepo;
 import com.doing.travel.entity.Money;
+import com.doing.travel.entity.MoneyVO;
 import com.doing.travel.service.MoneyService;
 import com.doing.travel.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class MoneyController {
 
     @GetMapping("/list")
     public Object getlist(@RequestParam Integer userId, @RequestParam String date){
-        List<Money> moneyList = moneyService.listMoney(userId, date);
+        List<MoneyVO> moneyList = moneyService.listMoney(userId, date);
         return ResponseUtil.ok(moneyList);
     }
 
@@ -43,4 +44,21 @@ public class MoneyController {
         moneyRepo.deleteById(id);
         return ResponseUtil.ok();
     }
+
+    @PostMapping("/edit")
+    public Object edit(@RequestBody Money money) {
+        return ResponseUtil.ok(moneyRepo.updateMoney(money.getSum(),money.getTime(),money.getRemark(),money.getId()));
+    }
+
+    @GetMapping("/week")
+    public Object getWeek(@RequestParam Integer userId,@RequestParam Integer type){
+        return ResponseUtil.ok(moneyService.weekData(userId, type));
+    }
+
+    @GetMapping("/month")
+    public Object getMonth(@RequestParam Integer userId,@RequestParam Integer type){
+        return ResponseUtil.ok(moneyService.monthData(userId, type));
+    }
+
+
 }

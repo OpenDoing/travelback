@@ -50,6 +50,41 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
+    public List<PlanVO> PlanlistByDestination(String destination) {
+        List<Plan> list = planRepo.findPlansByDestination(destination);
+        List<PlanVO> vlist = new ArrayList<>();
+        for (Plan plan:list){
+            List<CommentVO> clist = commentService.getCommentsByPid(plan.getId());
+            List<JoinVO> jlist = joinService.getJoinList(plan.getId());
+            Integer uid = plan.getUserId();
+            PlanVO planVO = new PlanVO(plan);
+            User user = userRepo.findUserById(uid);
+            planVO.setUsername(user.getUsername());
+            planVO.setSex(user.getSex());
+            planVO.setAvatar(user.getAvatar());
+            planVO.setComments(clist);
+            planVO.setJoins(jlist);
+            vlist.add(planVO);
+        }
+        return vlist;
+    }
+
+    @Override
+    public PlanVO getPlanDetail(Integer pid) {
+        List<CommentVO> clist = commentService.getCommentsByPid(pid);
+        List<JoinVO> jlist = joinService.getJoinList(pid);
+        Plan plan = planRepo.findPlanById(pid);
+        PlanVO planVO = new PlanVO(plan);
+        User user = userRepo.findUserById(plan.getUserId());
+        planVO.setUsername(user.getUsername());
+        planVO.setSex(user.getSex());
+        planVO.setAvatar(user.getAvatar());
+        planVO.setComments(clist);
+        planVO.setJoins(jlist);
+        return planVO;
+    }
+
+    @Override
     public List<Plan> getPlansByType(Integer userId, Integer type) {
         if (type == 0) {
             return planRepo.findPlansByUserId(userId);
@@ -64,4 +99,6 @@ public class PlanServiceImpl implements PlanService {
         }
 
     }
+
+
 }
