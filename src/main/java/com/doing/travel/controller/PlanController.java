@@ -145,4 +145,20 @@ public class PlanController {
         return ResponseUtil.ok(planRepo.findPlansByDestination(destination));
     }
 
+    //某id的行程具体详情
+    @GetMapping("/get")
+    private Object getOne(@RequestParam Integer id){
+        return ResponseUtil.ok(planRepo.findPlanById(id));
+    }
+
+    //修改行程单
+    @PostMapping("/change")
+    public Object changeComment(@RequestParam Integer id, @RequestParam String title,
+                                @RequestParam String start,@RequestParam String destination,
+                                @RequestParam Integer budget,@RequestParam Integer people,
+                                @RequestParam String fee,@RequestParam String description,
+                                @RequestParam Date stime,@RequestParam Date etime) {
+        return ResponseUtil.ok(planRepo.updatePlan(id, title, start, destination, budget, people, fee, description, stime, etime));
+    }
+
 }

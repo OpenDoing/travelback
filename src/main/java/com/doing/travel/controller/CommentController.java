@@ -37,4 +37,16 @@ public class CommentController {
         commentRepo.deleteById(id);
         return ResponseUtil.ok("删除成功！");
     }
+
+    @GetMapping("/get")
+    public Object getOne(@RequestParam Integer id) {
+        return ResponseUtil.ok(commentRepo.findById(id));
+    }
+
+    @PostMapping("/change")
+    public Object changeComment(@RequestParam Integer id, @RequestParam String content) {
+        return ResponseUtil.ok(commentRepo.updateComment(id, content));
+    }
+
+
 }
