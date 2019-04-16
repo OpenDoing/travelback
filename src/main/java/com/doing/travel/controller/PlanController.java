@@ -117,7 +117,7 @@ public class PlanController {
 
 
     @PostMapping("/like")
-    public Object LikeVideo(@RequestParam Integer userId, @RequestParam String destination) {
+    public Object LikeDestination(@RequestParam Integer userId, @RequestParam String destination) {
         if (liketRepo.findLiketByUserIdAndDestination(userId, destination) == null) {
             liketRepo.insertLike(userId, destination, 1);
         }else {
@@ -131,7 +131,7 @@ public class PlanController {
     }
 
     @GetMapping("/destination")
-    public Object getLikeVideo(@RequestParam Integer userId) {
+    public Object getLikeDestination(@RequestParam Integer userId) {
         //1.按照userid和分类查询结果
         List<Liket> likevs = liketRepo.findLiketsByUserId(userId);
         int temp = 0;
