@@ -157,7 +157,17 @@ public class PlanController {
                                 @RequestParam String start,@RequestParam String destination,
                                 @RequestParam Integer budget,@RequestParam Integer people,
                                 @RequestParam String fee,@RequestParam String description,
-                                @RequestParam Date stime,@RequestParam Date etime) {
+                                @RequestParam String stime,@RequestParam String etime) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        formatter.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
+        Date dateS = null;
+        Date dateE = null;
+        try {
+            dateS = formatter.parse(stime);
+            dateE = formatter.parse(etime);
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
         return ResponseUtil.ok(planRepo.updatePlan(id, title, start, destination, budget, people, fee, description, stime, etime));
     }
 

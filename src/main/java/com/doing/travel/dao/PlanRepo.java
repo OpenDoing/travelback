@@ -19,5 +19,5 @@ public interface PlanRepo extends JpaRepository<Plan, Integer>{
     @Modifying
     @Transactional
     @Query(value = "UPDATE plan SET title=?2,start=?3,destination=?4,budget=?5,people=?6, fee=?7,description=?8, stime=?9, etime=?9 WHERE id=?1", nativeQuery = true)
-    int updatePlan(Integer id, String title, String start, String destination, Integer budget, Integer people, String fee, String description, Date stime, Date etime);
+    int updatePlan(Integer id, String title, String start, String destination, Integer budget, Integer people, String fee, String description, String stime, String etime);
 }
